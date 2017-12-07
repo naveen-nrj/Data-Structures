@@ -1,0 +1,126 @@
+package DequeInt;
+
+public class DequeInt {
+	int arr[] = new int[5];
+	int front = -1;
+	int rear = -1;
+	int size = 5;
+	
+	DequeInt() {
+		arr = new int[10];
+		front = -1;
+		rear = -1;
+	}
+	
+	DequeInt(int sz) {
+		arr = new int[sz];
+		front = -1;
+		rear = -1;
+		size = sz;
+	}
+	
+	public void display() {
+		int i;
+		for( i = front; i < rear ; i = (i+1)) {
+				System.out.println(arr[i]);
+		}	
+	}
+	
+	public boolean isEmpty() {
+		if( front == -1 ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean isFull() {
+		if( (front == 0 && rear == size-1) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void insertLast(int item) {
+		if((rear + 1)% size == front ) {
+			System.out.println("Overflow");
+		}	
+		else {
+			if(front == -1) {
+				front=rear=0;
+				arr[rear] = item;
+			}
+			else { 
+				rear = (rear + 1)%size;
+				arr[rear] =  item;
+			}
+		}
+	}
+	
+	public void insertFront(int item) {
+		if((rear + 1)%size == front) {
+			System.out.println("Overflow");
+		}	
+		else {
+			if(front == -1) {
+				front=rear=0;
+				arr[front] = item;
+			}
+			else {
+				front = (front + size - 1)%size;
+				arr[front] =  item;
+			}
+		}
+	}
+	
+	public int deleteFront() {
+		int ret;
+		if(isEmpty()) {
+			System.out.println("underflow");
+			return -1;
+		}
+		else { 
+			if( front == rear) {
+				ret = arr[front];
+				front = rear = -1;
+				return ret;
+			}
+			else {
+				ret = arr[front];
+				front = (front + 1)%size;
+				return ret;
+			}
+		}
+	}
+	
+	public int deleteLast() {
+		int ret;
+		if(isEmpty()) {
+			System.out.println("underflow");
+			return -1;
+		}
+		else { 
+			if( front == rear) {
+				ret = arr[front];
+				front = rear = -1;
+				return ret;
+			}
+			else {
+				ret = arr[rear];
+				rear = (rear - 1)%size;
+				return ret;
+			}
+		}
+	}
+	
+	public int getRear() {
+		return arr[rear];
+	}
+	
+	public int getFront() {
+		return arr[front];
+	}
+}
